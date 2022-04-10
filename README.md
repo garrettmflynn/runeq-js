@@ -5,7 +5,7 @@
 <!-- [![Documentation Status](https://readthedocs.org/projects/runeq/badge/?version=latest)](https://runeq.readthedocs.io/en/latest/?badge=latest)
 [![CircleCI Status](https://circleci.com/gh/rune-labs/runeq-python.svg?style=shield)](https://app.circleci.com/pipelines/gh/rune-labs/runeq-python) -->
 
-A JavaScript Standard Development Kit (SDK) for Rune Lab's Query API
+A Web Standard Development Kit (SDK) for Rune Lab's Query API
 
 ## References
 <!-- * Library documentation: [https://runeq.readthedocs.io/en/latest](https://runeq.readthedocs.io/en/latest) -->
