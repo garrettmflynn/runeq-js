@@ -1,0 +1,31 @@
+.circle {
+  background: #ffffff;
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transform: translate(0%,0%);
+}
+
+.active {
+  background: #10bf00;
+}
+
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px;
+}
+
+.nav button {
+  flex-grow: 1;
+  min-width: 100px;
+  margin: 4px 2px;
+  padding: 5px 15px;
+  border: 1px solid white;
+  border-radius: 10px;
+  cursor: pointer;
+}
