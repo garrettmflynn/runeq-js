@@ -22,14 +22,12 @@ npm run start
 ### Browser
 #### Script Tag
 ```html
-<script src=""></script>
+<script src="https://cdn.jsdelivr.net/npm/runeq@latest"></script>
 ```
 
 #### ES6 Module
-```html
-<script>
-import * as runeq from ''
-</script>
+```js
+import * as runeq from 'https://cdn.jsdelivr.net/npm/runeq/dist/index.esm.js'
 ```
 
 ### Node
