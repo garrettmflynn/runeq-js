@@ -444,7 +444,7 @@ class TestStreamV1Client(TestCase):
             {'lower': None, 'higher': 8.9, 'label': 'missing data'},
         ]
 
-        for test_num, resource_creator in enumerate((
+        for resource_creator in (
                 self.client.Accel,
                 self.client.BandPower,
                 self.client.HeartRate,
@@ -452,7 +452,7 @@ class TestStreamV1Client(TestCase):
                 self.client.ProbabilitySymptom,
                 self.client.Rotation,
                 self.client.State,
-        )):
+        ):
             resource = resource_creator()
             # replace get_csv_response on the resource
             resource.get_csv_response = mock_get_csv_response(
@@ -493,7 +493,7 @@ class TestStreamV1Client(TestCase):
             {'lower': np.NaN, 'higher': 8.9, 'label': 'missing data'},
         ]
 
-        for test_num, resource_creator in enumerate((
+        for resource_creator in (
                 self.client.Accel,
                 self.client.BandPower,
                 self.client.HeartRate,
@@ -501,7 +501,7 @@ class TestStreamV1Client(TestCase):
                 self.client.ProbabilitySymptom,
                 self.client.Rotation,
                 self.client.State,
-        )):
+        ):
             resource = resource_creator()
             # replace get_csv_response on the resource
             resource.get_csv_response = mock_get_csv_response(

@@ -118,10 +118,10 @@ def get(key):
 
     if not key:
         for k in sorted(config):
-            print('{}: {}'.format(k, config[k]))
+            print(f'{k}: {config[k]}')
     else:
         for k in key:
-            print('{}: {}'.format(k, config.get(k, '')))
+            print(f"{k}: {config.get(k, '')}")
 
 
 @configure.command()

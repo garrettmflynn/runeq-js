@@ -120,31 +120,28 @@ class DeviceQuery(QueryBase):
         Only supported with a patient in context.
 
         """
-        if self._patient:
-
-            if ',' in device_id:
-                # Qualified ID: parse and verify
-                device_id = GraphID(device_id)
-
-                if device_id.principal != self._patient._id.principal:
-                    raise ValueError(
-                        "device does not belong to the specified patient")
-
-                device_id = device_id.unqualified
-
-            elif '-' in device_id:
-                # Strip resource prefix
-                device_id = device_id.split('-', 1)[-1]
-
-            # Load all patient devices and scan for it
-            for device in self:
-                if device.id == device_id:
-                    return device
-
-            raise KeyError(device_id)
-
-        else:
+        if not self._patient:
             raise TypeError("no patient specified for device query")
+        if ',' in device_id:
+            # Qualified ID: parse and verify
+            device_id = GraphID(device_id)
+
+            if device_id.principal != self._patient._id.principal:
+                raise ValueError(
+                    "device does not belong to the specified patient")
+
+            device_id = device_id.unqualified
+
+        elif '-' in device_id:
+            # Strip resource prefix
+            device_id = device_id.split('-', 1)[-1]
+
+        # Load all patient devices and scan for it
+        for device in self:
+            if device.id == device_id:
+                return device
+
+        raise KeyError(device_id)
 
 
     def __init__(self, session, patient=None):
@@ -164,9 +161,7 @@ class DeviceQuery(QueryBase):
 
         """
         sess = self._session
-        patient = self._patient
-
-        if patient:
+        if patient := self._patient:
             #
             # Devices of one patient
             #
@@ -224,9 +219,7 @@ class DeviceQuery(QueryBase):
 
         """
         sess = self._session
-        patient = self._patient
-
-        if patient:
+        if patient := self._patient:
             #
             # Devices of one patient
             #

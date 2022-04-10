@@ -28,10 +28,7 @@ def _str2float(s: str) -> Union[float, str]:
     """
     try:
         # if numpy is installed, use np.float64 instead of Python built-in
-        if USE_NUMPY:
-            return np.float64(s)
-        else:
-            return float(s)
+        return np.float64(s) if USE_NUMPY else float(s)
     except ValueError:
         return s
 
@@ -108,10 +105,7 @@ class StreamV1Base:
         """
         self._update_params(params)
 
-        url = urljoin(
-            self.config.stream_url,
-            '/v1/{}.json'.format(self._resource)
-        )
+        url = urljoin(self.config.stream_url, f'/v1/{self._resource}.json')
         log.debug(f'GET {url}?{urlencode(params)}')
         return requests.get(
             url,
@@ -212,10 +206,7 @@ class StreamV1CSVBase(StreamV1Base):
         """
         self._update_params(params)
 
-        url = urljoin(
-            self.config.stream_url,
-            '/v1/{}.csv'.format(self._resource)
-        )
+        url = urljoin(self.config.stream_url, f'/v1/{self._resource}.csv')
 
         log.debug(f'GET {url}?{urlencode(params)}')
         return requests.get(
@@ -244,16 +235,7 @@ class StreamV1CSVBase(StreamV1Base):
             APIError: when a request fails
         """
 
-        # page will be maintained independently of the params value
-        # to keep the page synchronized with the offset when the next
-        # page token header field is present. This will allow the page
-        # parameter to be added back to the params in the event that
-        # the next page token header field is absent from the response.
-        page = 0
-
-        if 'page' in params:
-            page = params['page']
-
+        page = params['page'] if 'page' in params else 0
         while True:
             r = self.get_csv_response(**params)
             _check_response(r)
@@ -308,11 +290,7 @@ class StreamV1CSVBase(StreamV1Base):
              is available, np.float64 is used.
 
         """
-        if USE_NUMPY:
-            restval = np.NaN
-        else:
-            restval = None
-
+        restval = np.NaN if USE_NUMPY else None
         for body in self.iter_csv_text(**params):
             reader = csv.DictReader(body.splitlines(), restval=restval)
             for point in reader:
@@ -324,11 +302,7 @@ class StreamV1CSVBase(StreamV1Base):
                         # but return the data anyway (unconverted).
                         log.warning('Data row had too many values')
                     else:
-                        if point[k] == '':
-                            point[k] = restval
-                        else:
-                            point[k] = _str2float(point[k])
-
+                        point[k] = restval if point[k] == '' else _str2float(point[k])
                 yield point
 
     def __iter__(self) -> Iterator[dict]:
