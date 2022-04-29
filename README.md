@@ -7,6 +7,11 @@
 
 A Web Standard Development Kit (SDK) for Rune Lab's Query API
 
+## Features
+- [x] Basic HTTP Requests for JSON data
+- [ ] GraphQL support
+
+
 ## References
 <!-- * Library documentation: [https://runeq.readthedocs.io/en/latest](https://runeq.readthedocs.io/en/latest) -->
 * API documentation: [https://docs.runelabs.io](https://docs.runelabs.io)
