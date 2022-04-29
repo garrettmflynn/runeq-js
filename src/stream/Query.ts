@@ -18,7 +18,7 @@ export class Query {
     }
 
     // Get Data Through API (JSON for now)
-    fetch = (query:string) => {
+    fetch = () => {
 
         const headers = this.config.authHeaders()
         if (headers instanceof Error) return headers

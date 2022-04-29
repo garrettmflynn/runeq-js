@@ -48,7 +48,6 @@ export class Config {
             'X-Rune-Client-Key-ID': this.clientAccessKey,
             'X-Rune-Client-Access-Key': this.clientKeyId
         }
-
     }
 
     //  Authentication headers for HTTP requests, using a JWT.

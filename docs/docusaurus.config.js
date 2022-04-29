@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'runeq',
-  tagline: `JavaScript Standard Development Kit (SDK) for Rune Lab's Query API`,
+  tagline: `A Web Standard Development Kit (SDK) for Rune Lab's Query API`,
   url: 'https://brainsatplay.com',
   baseUrl: '/',
   onBrokenLinks: 'warn',

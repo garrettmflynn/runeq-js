@@ -12,7 +12,7 @@ export class V1Client {
     }
 
     BandPower = (patientId:string, deviceId:string, startTime:number, endTime:number) => {
-        return new Query('bandpower', this.config, patientId, deviceId, startTime, endTime)
+        return new Query('band_power', this.config, patientId, deviceId, startTime, endTime)
     }
 
     Event = (patientId:string, deviceId:string, startTime:number, endTime:number) => {
@@ -28,7 +28,7 @@ export class V1Client {
     }
 
     ProbabilitySymptom = (patientId:string, deviceId:string, startTime:number, endTime:number) => {
-        return new Query('symptom', this.config, patientId, deviceId, startTime, endTime)
+        return new Query('probability_symptom', this.config, patientId, deviceId, startTime, endTime)
     }
 
     Rotation = (patientId:string, deviceId:string, startTime:number, endTime:number) => {

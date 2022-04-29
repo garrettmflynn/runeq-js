@@ -7,6 +7,16 @@ import styles from '../examples.module.css'
 export default function TestExample({server}) {
 
   const container = useRef(null);
+  const accel = useRef(null);
+  const bandpower = useRef(null);
+  const heartrate = useRef(null);
+  const event = useRef(null);
+  const lfp = useRef(null);
+  const symptom = useRef(null);
+  const rotation = useRef(null);
+  const span = useRef(null);
+  const state = useRef(null);
+  const readout = useRef(null);
 
   // Run After Initialization
   useEffect(async () => {
@@ -25,18 +35,25 @@ export default function TestExample({server}) {
     //   Math.floor(Date.now() / 1000),
     // )
 
-    const event = v1client.Event(
-      '3392b6a92482457e930eec05a9b32352',
-      'WMIXGmSK',
-      Math.floor((Date.now() - 1000*60*60*5)/ 1000),
-      Math.floor(Date.now() / 1000),
-    )
 
-    const data = await event.get()
+    for (let button of container.current.querySelectorAll('button')) {
+      button.onclick = async () => {
+          const accessor = v1client[button.id](
+            '3392b6a92482457e930eec05a9b32352',
+            'WMIXGmSK',
+            Math.floor((Date.now() - 1000*60*60*5)/ 1000),
+            Math.floor(Date.now() / 1000),
+          )
 
-    // console.log('accel', accel)
-    console.log('event', event)
-    console.log('data', data)
+        const data = await accessor.get()
+
+        // console.log('accel', accel)
+        console.log(button.id, accessor)
+        console.log(`${button.id} data`, data)
+
+        readout.current.innerHTML = JSON.stringify(data, null, 2)
+      }
+    }
 
     // for result in accel.iter_json_data():
     //  print(result.keys())
@@ -68,11 +85,20 @@ export default function TestExample({server}) {
     return (
       <div className="hero">
 
-        <div className="container">
+        <div ref={container} className="container">
 
-          <h1 className="hero__title">SDK Test</h1>
-          <div ref={container} className={clsx(styles.circle)}>
-          </div>
+            <h1 className="hero__title">SDK Test</h1>
+            <button id="Accel" ref={accel} >Acceleration</button>
+            <button id="BandPower" ref={bandpower} >BandPower</button>
+            <button id="Event" ref={event} >Event</button>
+            <button id="HeartRate" ref={heartrate} >Heart Rate</button>
+            <button id="LFP" ref={lfp} >LFP</button>
+            <button id="ProbabilitySymptom" ref={symptom} >Probability Symptom</button>
+            <button id="Rotation" ref={rotation} >Rotation</button>
+            <button id="Span" ref={span} >Span</button>
+            <button id="State" ref={state} >State</button>
+            <br></br>
+            <textarea ref={readout}></textarea>
         </div>
         </div>
 
