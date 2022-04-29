@@ -10,6 +10,7 @@ A Web SDK for Rune Lab's Query API
 ## Features
 - [x] Basic HTTP Requests for JSON data
 - [ ] GraphQL support
+- [ ] Allow POST requests for updating data from a custom UI
 
 
 ## Getting Started
