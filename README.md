@@ -5,7 +5,7 @@
 <!-- [![Documentation Status](https://readthedocs.org/projects/runeq/badge/?version=latest)](https://runeq.readthedocs.io/en/latest/?badge=latest)
 [![CircleCI Status](https://circleci.com/gh/rune-labs/runeq-python.svg?style=shield)](https://app.circleci.com/pipelines/gh/rune-labs/runeq-python) -->
 
-A Web Standard Development Kit (SDK) for Rune Lab's Query API
+A Web SDK for Rune Lab's Query API
 
 ## Features
 - [x] Basic HTTP Requests for JSON data
@@ -39,3 +39,15 @@ import * as runeq from 'https://cdn.jsdelivr.net/npm/runeq/dist/index.esm.js'
 ```basn
 npm install runeq
 ```
+
+
+## Acknowledgments
+This SDK was originally developed by [Garrett Flynn](https://github.com/garrettmflynn) during the [2022 Parkython & Rune Labs Ideathon](https://www.eventbrite.com/e/parkython-rune-labs-ideathon-tickets-311790803687) with the ParkyCompanion team (Team 3), including: 
+- Ro'ee Gilron (Rune Labs)
+- Yi-Ting Chang
+- Drew Perttula
+- Robin Duryee
+- Linda Horner
+- Nayanika Biswas
+- Matthias Schlesinger
+- Anina Lund
