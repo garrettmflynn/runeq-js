@@ -1,10 +1,10 @@
 {
   "name": "runeq",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Simple API to handle arbitrary data streams acquired through the browser.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "repository": "https://github.com/garrettmflynn/runeq-js",
   "files": [
     "dist"
