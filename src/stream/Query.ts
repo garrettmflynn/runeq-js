@@ -7,14 +7,16 @@ export class Query {
     deviceId: string;
     startTime: number;
     endTime: number;
+    options: {[x:string]: any};
 
-    constructor (name:string, config:Config, patientId:string = '', deviceId:string = '', startTime:number, endTime:number) {
+    constructor (name:string, config:Config, patientId:string = '', deviceId:string = '', startTime:number, endTime:number, options: {[x:string]: any} = {}) {
         this.name = name
         this.config = config
         this.patientId = patientId
         this.deviceId = deviceId
         this.startTime = startTime
         this.endTime = endTime;
+        this.options = options
     }
 
     // Get Data Through API (JSON for now)
@@ -28,6 +30,7 @@ export class Query {
         if (this.deviceId) params.device_id = this.deviceId
         if (this.startTime) params.start_time = this.startTime
         if (this.endTime) params.end_time = this.endTime
+        for (let option in this.options) params[option] = this.options[option]
     
 
        return fetch(`${this.config.streamURL}/v1/${this.name}.json?${new URLSearchParams(params)}`, {

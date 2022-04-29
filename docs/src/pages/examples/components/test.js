@@ -38,12 +38,17 @@ export default function TestExample({server}) {
 
     for (let button of container.current.querySelectorAll('button')) {
       button.onclick = async () => {
-          const accessor = v1client[button.id](
-            '3392b6a92482457e930eec05a9b32352',
-            'WMIXGmSK',
-            Math.floor((Date.now() - 1000*60*60*5)/ 1000),
-            Math.floor(Date.now() / 1000),
-          )
+        const args = [
+          '3392b6a92482457e930eec05a9b32352',
+          'WMIXGmSK',
+          Math.floor((Date.now() - 1000*60*60*5)/ 1000),
+          Math.floor(Date.now() / 1000),
+        ]
+
+        // if (button.id == 'State') args.push(...[])
+        // if (button.id == 'ProbabilitySymptom') args.push('tremor')
+
+        const accessor = v1client[button.id](...args)
 
         const data = await accessor.get()
 

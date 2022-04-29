@@ -1,4 +1,5 @@
 import { Query } from './Query'
+import { State } from './State'
 import { Config } from '../config'
 
 export class V1Client {
@@ -27,8 +28,8 @@ export class V1Client {
         return new Query('lfp', this.config, patientId, deviceId, startTime, endTime)
     }
 
-    ProbabilitySymptom = (patientId:string, deviceId:string, startTime:number, endTime:number) => {
-        return new Query('probability_symptom', this.config, patientId, deviceId, startTime, endTime)
+    ProbabilitySymptom = (patientId:string, deviceId:string, startTime:number, endTime:number, symptom:string) => {
+        return new Query('probability_symptom', this.config, patientId, deviceId, startTime, endTime, {symptom})
     }
 
     Rotation = (patientId:string, deviceId:string, startTime:number, endTime:number) => {
@@ -39,7 +40,7 @@ export class V1Client {
         return new Query('span',this.config, patientId, deviceId, startTime, endTime)
     }
 
-    State = (patientId:string, deviceId:string, startTime:number, endTime:number) => {
-        return new Query('state', this.config, patientId, deviceId, startTime, endTime)
+    State = (patientId:string, deviceId:string, startTime:number, endTime:number, event:string, fields:string[]=[]) => {
+        return new Query('state', this.config, patientId, deviceId, startTime, endTime, {event, fields})
     }
 }
