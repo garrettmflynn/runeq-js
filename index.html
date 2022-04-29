@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Standalone Demo</title>
-    <link rel="stylesheet" href="./styles.css">
+    <title>runeq-js</title>
+    <style>
+        html,
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            margin-top: 25px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin: auto; 
+            background: black;
+            color: white;
+            padding: 10px 25px;
+        }
+
+        section {
+            padding: 10px 50px;
+        }
+
+        h2, h3 {
+            margin: 0;
+        }
+
+        #events {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #events > div {
+            border-radius: 25px;
+            margin: 10px;
+            padding: 25px;
+            background: whitesmoke;
+            width: 200px;
+            flex-grow: 1;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/runeq@0.0.1"></script>
 </head>
+
 <body>
-    
+    <nav>runeq Web SDK</nav>
+    <section>
+        <h2>Events</h2>
+        <hr>
+        <div id="events"></div>
+    </section>
 </body>
 
 <script type="module">
@@ -17,35 +68,39 @@
 
     const accessTokenId = '[YOUR TOKENS HERE]'
     const accessTokenSecret = '[YOUR TOKENS HERE]'
-    const config = new runeq.Config({accessTokenId,accessTokenSecret})
+    const config = new runeq.Config({ accessTokenId, accessTokenSecret })
     const v1client = new runeq.stream.V1Client(config)
+    const events = document.body.querySelector('#events')
+    const button = { id: 'Event' }
 
-    const button = {id: 'Event'}
-        const args = [
-          '3392b6a92482457e930eec05a9b32352',
-          'WMIXGmSK',
-          Math.floor((Date.now() - 1000*60*60*5)/ 1000),
-          Math.floor(Date.now() / 1000),
-        ]
+    const accessor = v1client.Event(
+        '3392b6a92482457e930eec05a9b32352',
+        'WMIXGmSK',
+        Math.floor((Date.now() - 1000 * 60 * 60 * 5) / 1000),
+        Math.floor(Date.now() / 1000),
+    )
 
-        const accessor = v1client[button.id](...args)
+    const data = await accessor.get()
 
-        const data = await accessor.get()
-
-        data.event.forEach(o => {
-            const arr = []
-            if (o.payload.category){
-                for (let key in o.payload) arr.push([key, o.payload[key]])
-                const div = document.createElement('div')
-                div.innerHTML = `
-                <h3>${o.payload.category}</h3>
-                ${arr.map(arr => `<p><strong>${arr[0]}:</strong> ${arr[1]}</p>`).join('') }
-                `
-                document.body.insertAdjacentElement('beforeend', div)
-
+    data.event.forEach(o => {
+        const arr = []
+        // Only Show Payloads with a Definite Category
+        if (o.payload.category) {
+            for (let key in o.payload) {
+                if (key != 'category') arr.push([key, o.payload[key]])
             }
-        })
+            const div = document.createElement('div')
+            div.innerHTML = `
+                <h3>${o.payload.category}</h3>
+                <small><small>${new Date(o.time * 1000)}</small></small>
+
+                ${arr.map(arr => `<p><strong>${arr[0]}:</strong> ${arr[1]}</p>`).join('')}
+                `
+                events.insertAdjacentElement('beforeend', div)
+        }
+    })
 
 
 </script>
+
 </html>

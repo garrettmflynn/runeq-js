@@ -74,7 +74,7 @@ npm run start
 
 
 ## Acknowledgments
-This SDK was originally developed by [Garrett Flynn](https://github.com/garrettmflynn) during the [2022 Parkython & Rune Labs Ideathon](https://www.eventbrite.com/e/parkython-rune-labs-ideathon-tickets-311790803687) with the ParkyCompanion team (Team 3), including: 
+This SDK was originally developed by [Garrett Flynn](https://github.com/garrettmflynn) during the [2022 Parkython & Rune Labs Ideathon](https://www.eventbrite.com/e/parkython-rune-labs-ideathon-tickets-311790803687) with the ParkiCompanion team (Team 3), including: 
 - Ro'ee Gilron (Rune Labs)
 - Yi-Ting Chang
 - Drew Perttula
