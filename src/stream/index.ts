@@ -1,5 +1,4 @@
 import { Query } from './Query'
-import { State } from './State'
 import { Config } from '../config'
 
 export class V1Client {

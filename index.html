@@ -5,14 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Standalone Demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/runeq@latest"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/runeq@0.0.1"></script>
 </head>
 <body>
     
 </body>
 
 <script type="module">
-import * as runeq from 'https://cdn.jsdelivr.net/npm/runeq@latest/dist/index.esm.js'
-console.log(runeq)
+    import * as runeq from 'https://cdn.jsdelivr.net/npm/runeq@0.0.1/dist/index.esm.js'
+
+    const accessTokenId = '[YOUR TOKENS HERE]'
+    const accessTokenSecret = '[YOUR TOKENS HERE]'
+    const config = new runeq.Config({accessTokenId,accessTokenSecret})
+    const v1client = new runeq.stream.V1Client(config)
+
+    const button = {id: 'Event'}
+        const args = [
+          '3392b6a92482457e930eec05a9b32352',
+          'WMIXGmSK',
+          Math.floor((Date.now() - 1000*60*60*5)/ 1000),
+          Math.floor(Date.now() / 1000),
+        ]
+
+        const accessor = v1client[button.id](...args)
+
+        const data = await accessor.get()
+
+        data.event.forEach(o => {
+            const arr = []
+            if (o.payload.category){
+                for (let key in o.payload) arr.push([key, o.payload[key]])
+                const div = document.createElement('div')
+                div.innerHTML = `
+                <h3>${o.payload.category}</h3>
+                ${arr.map(arr => `<p><strong>${arr[0]}:</strong> ${arr[1]}</p>`).join('') }
+                `
+                document.body.insertAdjacentElement('beforeend', div)
+
+            }
+        })
+
+
 </script>
 </html>
